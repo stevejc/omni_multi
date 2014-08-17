@@ -10,4 +10,19 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password, :current_password) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:first_name, :last_name, :email, :password, :current_password) }
   end
+  
+  private
+
+  def current_account
+    Account.find_by_owner_id(current_user.id)
+  end
+  helper_method :current_account
+  
+  def verify_account
+    if !current_account
+      flash[:alert] = "You must create or be added to an account to access this page."
+      redirect_to root_path
+    end
+  end
+  
 end
