@@ -1,0 +1,10 @@
+<%= render 'layouts/error' %>
+<h1>
+  <%= "New #{(session["devise.user_attributes"]['provider']).capitalize} Account" %>
+</h1>
+<p>
+  <%= "We have't had anyone log in with this #{(session["devise.user_attributes"]['provider']).capitalize} Account before." %>
+</p>
+<p>Do you want to:</p>
+<%= link_to "Create a new Account", pricing_path, class: 'btn btn-primary btn-lg' %>
+<%= link_to "Add it your existing Account", edit_user_registration_path, class: 'btn btn-primary btn-lg' %>

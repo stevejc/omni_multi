@@ -5,6 +5,10 @@ class AccountsController < ApplicationController
     @account = Account.new(plan: params[:plan])
     unless current_user
       @account.build_owner
+      if session["devise.user_attributes"]
+        @account.owner.provider = session["devise.user_attributes"]["provider"]
+        @account.owner.uid = session["devise.user_attributes"]["uid"]
+      end
     end
   end
 
@@ -39,7 +43,7 @@ class AccountsController < ApplicationController
   
   private
     def account_params
-      params.require(:account).permit(:owner_id, :name, :plan, :email, :phone, :address, :time_zone, owner_attributes: [:account_id, :name, :email, :password, :password_confirmation])
+      params.require(:account).permit(:owner_id, :name, :plan, :email, :phone, :address, :time_zone, owner_attributes: [:account_id, :first_name, :last_name, :provider, :uid, :email, :password, :password_confirmation])
     end
 
 end

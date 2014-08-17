@@ -4,7 +4,7 @@
     <li><%= link_to "Settings", edit_account_path(current_account) %></li>
     <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
   <% else %>
-    <li><%= link_to "Sign Up", pricing_path %></li>
+    <li><%= link_to "Sign Up", new_account_path(:plan => 'gold') %></li>
     <li><%= link_to "Pricing", pricing_path %></li>
     <li><%= link_to "Login", new_user_session_path %></li>
   <% end %>
